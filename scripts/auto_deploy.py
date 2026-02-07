@@ -63,9 +63,27 @@ def run_pipeline(pdf_path):
         
     # Assign ID
     max_id = max([l.get('id', 0) for l in lessons]) if lessons else 0
-    new_lesson['id'] = max_id + 1
     
-    lessons.append(new_lesson)
+    # Check for duplicates based on title
+    existing_titles = {l.get('title'): l.get('id') for l in lessons}
+    new_title = new_lesson.get('title')
+    
+    if new_title in existing_titles:
+        print(f"⚠️ Warning: Lesson '{new_title}' already exists (ID: {existing_titles[new_title]}).")
+        # Update existing lesson instead of appending new one?
+        # For now, let's update it in place to avoid duplicates.
+        target_id = existing_titles[new_title]
+        new_lesson['id'] = target_id
+        # Replace the old lesson with the new one
+        for i, l in enumerate(lessons):
+            if l.get('id') == target_id:
+                lessons[i] = new_lesson
+                break
+        print(f"🔄 Updated existing lesson (ID: {target_id})")
+    else:
+        new_lesson['id'] = max_id + 1
+        lessons.append(new_lesson)
+        print(f"✅ Added new lesson (ID: {new_lesson['id']})")
     
     with open(lessons_path, 'w', encoding='utf-8') as f:
         json.dump(lessons, f, indent=2, ensure_ascii=False)
