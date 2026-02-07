@@ -44,7 +44,7 @@ def seed_data():
                 "pinyin": "chūn fēng", 
                 "definition": "春天的风", 
                 "example": "春风吹",
-                "image_url": "https://images.unsplash.com/photo-1495530638670-ce58247e8652?w=600",
+                "image_url": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600",
                 "local_name": "spring_breeze.jpg"
             },
             {
@@ -52,7 +52,7 @@ def seed_data():
                 "pinyin": "xià yǔ", 
                 "definition": "夏天的雨", 
                 "example": "夏雨落",
-                "image_url": "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=600",
+                "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600",
                 "local_name": "summer_rain.jpg"
             },
             {
@@ -60,7 +60,7 @@ def seed_data():
                 "pinyin": "qiū shuāng", 
                 "definition": "秋天的霜", 
                 "example": "秋霜降",
-                "image_url": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600",
+                "image_url": "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600",
                 "local_name": "autumn_frost.jpg"
             },
             {
@@ -68,7 +68,7 @@ def seed_data():
                 "pinyin": "dōng xuě", 
                 "definition": "冬天的雪", 
                 "example": "冬雪飘",
-                "image_url": "https://images.unsplash.com/photo-1418985991508-e473fa6f9cc0?w=600",
+                "image_url": "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600",
                 "local_name": "winter_snow.jpg"
             }
         ],
