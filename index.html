@@ -136,9 +136,11 @@
                 </div>
             </div>
 
-            <!-- 数学模块：交互几何画布 -->
+            <!-- 数学模块 -->
             <div v-if="currentLesson.subject === 'Math'" class="space-y-6">
-                <div class="bg-white rounded-[2.5rem] p-6 shadow-2xl border border-blue-100 relative overflow-hidden">
+                
+                <!-- 模式 1: 几何图形 (Geometry) -->
+                <div v-if="currentLesson.content.shapes && currentLesson.content.shapes.length > 0" class="bg-white rounded-[2.5rem] p-6 shadow-2xl border border-blue-100 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-blue-500"></div>
                     
                     <div class="flex justify-between items-center mb-6">
@@ -175,6 +177,45 @@
                         <p class="text-sm text-blue-600/80 leading-relaxed">{{ activeShape.desc }}</p>
                     </div>
                 </div>
+
+                <!-- 模式 2: 算术与概念 (Arithmetic & Concepts) -->
+                <div v-else class="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-blue-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-indigo-500"></div>
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-kids font-black mb-2 text-indigo-600">{{ currentLesson.title }}</h2>
+                        <div class="text-sm text-slate-400">数学知识点</div>
+                    </div>
+
+                    <!-- 核心概念 -->
+                    <div v-if="currentLesson.content.key_concepts" class="space-y-4 mb-8">
+                        <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-2">核心概念</h3>
+                        <div v-for="(concept, idx) in currentLesson.content.key_concepts" :key="idx" 
+                             class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-start gap-3">
+                            <span class="bg-indigo-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{{ idx + 1 }}</span>
+                            <span class="text-indigo-900 font-medium">{{ concept }}</span>
+                        </div>
+                    </div>
+
+                    <!-- 公式卡片 -->
+                    <div v-if="currentLesson.content.formulas" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div v-for="(formula, idx) in currentLesson.content.formulas" :key="idx" 
+                             class="p-6 bg-slate-800 rounded-2xl text-white text-center font-mono text-xl md:text-2xl shadow-lg transform hover:scale-105 transition-transform cursor-default">
+                            {{ formula }}
+                        </div>
+                    </div>
+
+                    <!-- 练习题 (如有) -->
+                    <div v-if="currentLesson.content.problems" class="space-y-4">
+                         <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-2">练一练</h3>
+                         <div v-for="(prob, idx) in currentLesson.content.problems" :key="idx" class="p-4 bg-white border-2 border-slate-100 rounded-2xl flex justify-between items-center group hover:border-indigo-300 transition-colors">
+                            <span class="text-lg font-bold text-slate-700 font-mono">{{ prob }}</span>
+                            <button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                                <i class="ph-bold ph-pencil-simple"></i>
+                            </button>
+                         </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -232,8 +273,12 @@
                     this.currentLesson = lesson;
                     this.chineseTab = 'recite';
                     this.poemStep = 1;
-                    if (lesson.subject === 'Math') {
+                    if (lesson.subject === 'Math' && lesson.content.shapes) {
                         this.selectShape(lesson.content.shapes[0]);
+                    } else {
+                        // Reset math state
+                        this.activeShape = null;
+                        this.points = [];
                     }
                 },
                 // 数学逻辑
