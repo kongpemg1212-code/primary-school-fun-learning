@@ -3,93 +3,83 @@ import json
 import requests
 import time
 from pathlib import Path
-# No OpenAI import needed
 
 def generate_image_free(prompt, filename):
     """
-    Generates image using Pollinations.ai (Free, No Key)
+    Generates image URL using Lorem Flickr (Reliable, Free)
     """
     try:
-        # Construct prompt for kids style
-        safe_prompt = f"cute cartoon {prompt} vector flat design minimalistic white background children book style"
-        encoded_prompt = requests.utils.quote(safe_prompt)
-        url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1024&height=1024&seed={int(time.time())}&nologo=true"
+        # Simple keyword extraction (first 1-2 words)
+        keywords = prompt.split(' ')[0]
+        if len(keywords) < 3: 
+             parts = prompt.split(' ')
+             if len(parts) > 1:
+                 keywords = parts[1]
         
-        print(f"   🎨 Generating (Free AI): {prompt}...")
+        keywords = "".join([c for c in keywords if c.isalnum()])
+        # Use cartoon/cat as fallback category to make it fun for kids
+        url = f"https://loremflickr.com/512/512/{keywords},cartoon/all"
         
-        # Download
-        response = requests.get(url, timeout=30)
+        print(f"   🎨 Using Lorem Flickr: {keywords}...")
+        
+        response = requests.get(url, timeout=30, allow_redirects=True)
         if response.status_code == 200:
             output_dir = Path("assets/images")
             output_dir.mkdir(parents=True, exist_ok=True)
             
-            # Sanitize filename
             safe_filename = "".join([c for c in filename if c.isalnum() or c in (' ', '.', '_')]).strip()
             output_path = output_dir / safe_filename
             
             with open(output_path, 'wb') as f:
                 f.write(response.content)
-                
             return str(output_path), url
         else:
-            print(f"❌ API Error {response.status_code}")
             return None, None
             
     except Exception as e:
-        print(f"❌ Image generation failed for {prompt}: {e}")
+        print(f"❌ Failed: {e}")
         return None, None
 
 def process_lesson(json_path):
     if not os.path.exists(json_path):
-        print(f"❌ Input file not found: {json_path}")
         return
 
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
         
-    # Check if list or dict
     if isinstance(data, list):
         lessons = data
     else:
         lessons = [data]
         
-    total_updated = 0
-    
     for lesson in lessons:
-        # Handle Chinese Vocabulary
         vocab_list = lesson.get('content', {}).get('vocabulary', [])
-        
         for item in vocab_list:
             word = item.get('word')
             definition = item.get('definition', '')
             
-            # Check if image already exists
-            if not item.get('image') or item.get('image') == "LEAVE_EMPTY_FOR_NOW":
-                # Translate or use English word if available? 
-                # Pollinations understands English better.
-                # We assume 'word' might be Chinese. 
-                # Simple heuristic: use definition if it looks English, or just word + definition
-                search_term = f"{word} {definition}"
+            # Check exist (Relative path!)
+            if (Path("assets/images") / f"{word}.jpg").exists():
+                print(f"ℹ️ Exists: {word}")
+                item['image'] = f"assets/images/{word}.jpg"
+                continue
                 
-                local_path, url = generate_image_free(search_term, f"{word}.jpg")
-                
-                if local_path:
-                    item['image'] = local_path
-                    item['image_url'] = url 
-                    item['local_name'] = Path(local_path).name
-                    total_updated += 1
-                    print(f"✅ Saved to {local_path}")
-                else:
-                    print(f"⚠️ Skipping image for {word}")
-            else:
-                print(f"ℹ️ Image already exists for {word}")
+            # Generate
+            search_term = definition if definition else word
+            local_path, url = generate_image_free(search_term, f"{word}.jpg")
             
-    # Save updated JSON
+            if local_path:
+                item['image'] = str(local_path)
+                item['image_url'] = url
+                print(f"✅ Saved: {local_path}")
+            else:
+                # Fallback to text placeholder
+                item['image'] = "" 
+
+    # Save
     output_path = Path("temp") / "illustrated_lesson.json"
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    
-    print(f"✅ Illustrated data saved to {output_path} (Updated {total_updated} images)")
 
 if __name__ == "__main__":
     import argparse

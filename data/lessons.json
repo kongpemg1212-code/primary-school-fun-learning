@@ -184,42 +184,58 @@
         {
           "word": "春风",
           "definition": "Spring breeze",
-          "pinyin": "chūn fēng"
+          "pinyin": "chūn fēng",
+          "image": "assets/images/春风.jpg",
+          "image_url": "https://loremflickr.com/512/512/Spring,cartoon/all"
         },
         {
           "word": "夏雨",
           "definition": "Summer rain",
-          "pinyin": "xià yǔ"
+          "pinyin": "xià yǔ",
+          "image": "assets/images/夏雨.jpg",
+          "image_url": "https://loremflickr.com/512/512/Summer,cartoon/all"
         },
         {
           "word": "秋霜",
           "definition": "Autumn frost",
-          "pinyin": "qiū shuāng"
+          "pinyin": "qiū shuāng",
+          "image": "assets/images/秋霜.jpg",
+          "image_url": "https://loremflickr.com/512/512/Autumn,cartoon/all"
         },
         {
           "word": "冬雪",
           "definition": "Winter snow",
-          "pinyin": "dōng xuě"
+          "pinyin": "dōng xuě",
+          "image": "assets/images/冬雪.jpg",
+          "image_url": "https://loremflickr.com/512/512/Winter,cartoon/all"
         },
         {
           "word": "青草",
           "definition": "Green grass",
-          "pinyin": "qīng cǎo"
+          "pinyin": "qīng cǎo",
+          "image": "assets/images/青草.jpg",
+          "image_url": "https://loremflickr.com/512/512/Green,cartoon/all"
         },
         {
           "word": "红花",
           "definition": "Red flower",
-          "pinyin": "hóng huā"
+          "pinyin": "hóng huā",
+          "image": "assets/images/红花.jpg",
+          "image_url": "https://loremflickr.com/512/512/Red,cartoon/all"
         },
         {
           "word": "游鱼",
           "definition": "Swimming fish",
-          "pinyin": "yóu yú"
+          "pinyin": "yóu yú",
+          "image": "assets/images/游鱼.jpg",
+          "image_url": "https://loremflickr.com/512/512/Swimming,cartoon/all"
         },
         {
           "word": "飞鸟",
           "definition": "Flying bird",
-          "pinyin": "fēi niǎo"
+          "pinyin": "fēi niǎo",
+          "image": "assets/images/飞鸟.jpg",
+          "image_url": "https://loremflickr.com/512/512/Flying,cartoon/all"
         }
       ],
       "sentences": [
@@ -246,37 +262,51 @@
         {
           "word": "姓",
           "definition": "Surname",
-          "pinyin": "xìng"
+          "pinyin": "xìng",
+          "image": "assets/images/姓.jpg",
+          "image_url": "https://loremflickr.com/512/512/Surname,cartoon/all"
         },
         {
           "word": "李",
           "definition": "Li (surname)",
-          "pinyin": "lǐ"
+          "pinyin": "lǐ",
+          "image": "assets/images/李.jpg",
+          "image_url": "https://loremflickr.com/512/512/surname,cartoon/all"
         },
         {
           "word": "张",
           "definition": "Zhang (surname)",
-          "pinyin": "zhāng"
+          "pinyin": "zhāng",
+          "image": "assets/images/张.jpg",
+          "image_url": "https://loremflickr.com/512/512/Zhang,cartoon/all"
         },
         {
           "word": "胡",
           "definition": "Hu (surname)",
-          "pinyin": "hú"
+          "pinyin": "hú",
+          "image": "assets/images/胡.jpg",
+          "image_url": "https://loremflickr.com/512/512/surname,cartoon/all"
         },
         {
           "word": "吴",
           "definition": "Wu (surname)",
-          "pinyin": "wú"
+          "pinyin": "wú",
+          "image": "assets/images/吴.jpg",
+          "image_url": "https://loremflickr.com/512/512/surname,cartoon/all"
         },
         {
           "word": "徐",
           "definition": "Xu (surname)",
-          "pinyin": "xú"
+          "pinyin": "xú",
+          "image": "assets/images/徐.jpg",
+          "image_url": "https://loremflickr.com/512/512/surname,cartoon/all"
         },
         {
           "word": "许",
           "definition": "Xu (surname)",
-          "pinyin": "xǔ"
+          "pinyin": "xǔ",
+          "image": "assets/images/许.jpg",
+          "image_url": "https://loremflickr.com/512/512/surname,cartoon/all"
         }
       ],
       "sentences": [
@@ -298,47 +328,65 @@
         {
           "word": "青蛙",
           "definition": "Frog",
-          "pinyin": "qīng wā"
+          "pinyin": "qīng wā",
+          "image": "assets/images/青蛙.jpg",
+          "image_url": "https://loremflickr.com/512/512/Frog,cartoon/all"
         },
         {
           "word": "河水",
           "definition": "River water",
-          "pinyin": "hé shuǐ"
+          "pinyin": "hé shuǐ",
+          "image": "assets/images/河水.jpg",
+          "image_url": "https://loremflickr.com/512/512/River,cartoon/all"
         },
         {
           "word": "清",
           "definition": "Clear",
-          "pinyin": "qīng"
+          "pinyin": "qīng",
+          "image": "assets/images/清.jpg",
+          "image_url": "https://loremflickr.com/512/512/Clear,cartoon/all"
         },
         {
           "word": "天气",
           "definition": "Weather",
-          "pinyin": "tiān qì"
+          "pinyin": "tiān qì",
+          "image": "assets/images/天气.jpg",
+          "image_url": "https://loremflickr.com/512/512/Weather,cartoon/all"
         },
         {
           "word": "晴",
           "definition": "Sunny",
-          "pinyin": "qíng"
+          "pinyin": "qíng",
+          "image": "assets/images/晴.jpg",
+          "image_url": "https://loremflickr.com/512/512/Sunny,cartoon/all"
         },
         {
           "word": "眼睛",
           "definition": "Eye",
-          "pinyin": "yǎn jing"
+          "pinyin": "yǎn jing",
+          "image": "assets/images/眼睛.jpg",
+          "image_url": "https://loremflickr.com/512/512/Eye,cartoon/all"
         },
         {
           "word": "保护",
           "definition": "Protect",
-          "pinyin": "bǎo hù"
+          "pinyin": "bǎo hù",
+          "image": "assets/images/保护.jpg",
+          "image_url": "https://loremflickr.com/512/512/Protect,cartoon/all"
         },
         {
           "word": "害虫",
           "definition": "Pest",
-          "pinyin": "hài chóng"
+          "pinyin": "hài chóng",
+          "image": "assets/images/害虫.jpg",
+          "image_url": "https://loremflickr.com/512/512/Pest,cartoon/all"
         },
         {
           "word": "事情",
           "definition": "Thing/Matter",
-          "pinyin": "shì qing"
+          "pinyin": "shì qing",
+          "image": "assets/images/事情.jpg",
+          "image_url": "https://loremflickr.com/512/512/ThingMatter,cartoon/all"
         }
       ],
       "sentences": [
@@ -360,52 +408,72 @@
         {
           "word": "相遇",
           "definition": "Meet",
-          "pinyin": "xiāng yù"
+          "pinyin": "xiāng yù",
+          "image": "assets/images/相遇.jpg",
+          "image_url": "https://loremflickr.com/512/512/Meet,cartoon/all"
         },
         {
           "word": "喜欢",
           "definition": "Like",
-          "pinyin": "xǐ huan"
+          "pinyin": "xǐ huan",
+          "image": "assets/images/喜欢.jpg",
+          "image_url": "https://loremflickr.com/512/512/Like,cartoon/all"
         },
         {
           "word": "怕",
           "definition": "Fear",
-          "pinyin": "pà"
+          "pinyin": "pà",
+          "image": "assets/images/怕.jpg",
+          "image_url": "https://loremflickr.com/512/512/Fear,cartoon/all"
         },
         {
           "word": "言",
           "definition": "Speech/Word",
-          "pinyin": "yán"
+          "pinyin": "yán",
+          "image": "assets/images/言.jpg",
+          "image_url": "https://loremflickr.com/512/512/SpeechWord,cartoon/all"
         },
         {
           "word": "互相",
           "definition": "Mutual",
-          "pinyin": "hù xiāng"
+          "pinyin": "hù xiāng",
+          "image": "assets/images/互相.jpg",
+          "image_url": "https://loremflickr.com/512/512/Mutual,cartoon/all"
         },
         {
           "word": "尊重",
           "definition": "Respect",
-          "pinyin": "zūn zhòng"
+          "pinyin": "zūn zhòng",
+          "image": "assets/images/尊重.jpg",
+          "image_url": "https://loremflickr.com/512/512/Respect,cartoon/all"
         },
         {
           "word": "感动",
           "definition": "Moved/Touching",
-          "pinyin": "gǎn dòng"
+          "pinyin": "gǎn dòng",
+          "image": "assets/images/感动.jpg",
+          "image_url": "https://loremflickr.com/512/512/MovedTouching,cartoon/all"
         },
         {
           "word": "万里无云",
           "definition": "Cloudless sky",
-          "pinyin": "wàn lǐ wú yún"
+          "pinyin": "wàn lǐ wú yún",
+          "image": "assets/images/万里无云.jpg",
+          "image_url": "https://loremflickr.com/512/512/Cloudless,cartoon/all"
         },
         {
           "word": "纯净",
           "definition": "Pure",
-          "pinyin": "chún jìng"
+          "pinyin": "chún jìng",
+          "image": "assets/images/纯净.jpg",
+          "image_url": "https://loremflickr.com/512/512/Pure,cartoon/all"
         },
         {
           "word": "透明",
           "definition": "Transparent",
-          "pinyin": "tòu míng"
+          "pinyin": "tòu míng",
+          "image": "assets/images/透明.jpg",
+          "image_url": "https://loremflickr.com/512/512/Transparent,cartoon/all"
         }
       ],
       "sentences": [
