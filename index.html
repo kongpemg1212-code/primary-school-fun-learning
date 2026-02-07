@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
@@ -16,6 +17,10 @@
         .hidden-word:hover { color: rgba(147, 161, 161, 0.3); }
         [v-cloak] { display: none; }
         .tab-active { @apply bg-white shadow-md text-blue-600; }
+        .drag-item { cursor: grab; transition: transform 0.2s, box-shadow 0.2s; }
+        .drag-item:active { cursor: grabbing; }
+        .sortable-ghost { opacity: 0.4; background: #e2e8f0; }
+        .sortable-chosen { @apply border-orange-500 shadow-lg; }
     </style>
 </head>
 <body class="paper-bg min-h-screen text-slate-800">
@@ -52,9 +57,16 @@
                 <i class="ph-bold ph-arrow-left"></i> 返回列表
             </button>
 
-            <!-- 语文模块：背诵神器 -->
+            <!-- 语文模块：背诵神器 + 拖拽排序 -->
             <div v-if="currentLesson.subject === 'Chinese'" class="space-y-6">
-                <div class="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-orange-100 relative overflow-hidden">
+                
+                <!-- 模块切换 -->
+                <div class="flex p-1 bg-slate-200 rounded-2xl mb-2 w-fit mx-auto">
+                    <button @click="chineseTab = 'recite'" :class="['px-6 py-2 rounded-xl text-sm font-black transition', chineseTab === 'recite' ? 'bg-white shadow-sm text-orange-600' : 'text-slate-500']">背诵神器</button>
+                    <button @click="initSortingGame" :class="['px-6 py-2 rounded-xl text-sm font-black transition', chineseTab === 'sort' ? 'bg-white shadow-sm text-orange-600' : 'text-slate-500']">语序挑战</button>
+                </div>
+
+                <div v-if="chineseTab === 'recite'" class="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-orange-100 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-orange-500"></div>
                     <div class="text-center mb-8">
                         <h2 class="text-3xl font-kids font-black mb-2">{{ currentLesson.title }}</h2>
@@ -82,6 +94,32 @@
                         <div class="text-sm font-bold text-orange-400 mt-1">{{ stepDescription }}</div>
                     </div>
                 </div>
+
+                <!-- 语序挑战组件 -->
+                <div v-if="chineseTab === 'sort'" class="bg-white rounded-[2.5rem] p-8 shadow-2xl border border-orange-100 relative">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-black text-slate-700">诗句大排队</h2>
+                        <p class="text-xs text-slate-400 mt-1">按正确顺序拖拽卡片</p>
+                    </div>
+
+                    <div id="sort-list" class="space-y-3">
+                        <div v-for="line in shuffledSentences" :key="line" class="drag-item p-4 bg-slate-50 border-2 border-slate-200 rounded-2xl text-center font-kids text-lg font-bold hover:bg-orange-50 hover:border-orange-200 transition-colors">
+                            {{ line }}
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex flex-col items-center gap-4">
+                        <div v-if="isSortedCorrect" class="animate-bounce text-green-500 font-black flex items-center gap-2">
+                             <i class="ph-fill ph-check-circle text-2xl"></i> 太棒了！顺序完全正确！
+                        </div>
+                        <button @click="checkSortOrder" class="w-full py-4 bg-orange-500 text-white rounded-2xl font-black shadow-lg active:scale-95 transition-transform">
+                            检查答案
+                        </button>
+                        <button @click="initSortingGame" class="text-slate-400 text-sm font-bold hover:text-orange-500 transition">
+                            重新打乱
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- 数学模块：占位 -->
@@ -103,7 +141,11 @@
                     subject: 'Chinese',
                     lessons: [],
                     currentLesson: null,
-                    poemStep: 1 // 1: 全显, 2: 挖词, 3: 留首字, 4: 全空
+                    chineseTab: 'recite', // recite, sort
+                    poemStep: 1, // 1: 全显, 2: 挖词, 3: 留首字, 4: 全空
+                    shuffledSentences: [],
+                    isSortedCorrect: false,
+                    sortInstance: null
                 }
             },
             computed: {
@@ -134,6 +176,7 @@
                 },
                 selectLesson(lesson) {
                     this.currentLesson = lesson;
+                    this.chineseTab = 'recite';
                     this.poemStep = 1;
                 },
                 isHidden(char, charIdx, lineIdx) {
@@ -141,11 +184,40 @@
                     if (this.poemStep === 4) return true;
                     if (this.poemStep === 3) return charIdx > 0; // 只留第一个字
                     if (this.poemStep === 2) {
-                        // 语文课文中的动词挖空逻辑 (示例匹配：吹、落、降、飘)
-                        const keywords = ['吹', '落', '降', '飘'];
+                        const keywords = ['吹', '落', '降', '飘', '入', '出'];
                         return keywords.includes(char);
                     }
                     return false;
+                },
+                initSortingGame() {
+                    this.chineseTab = 'sort';
+                    this.isSortedCorrect = false;
+                    const original = [...this.currentLesson.content.sentences];
+                    this.shuffledSentences = original.sort(() => Math.random() - 0.5);
+                    
+                    // Wait for Vue to render the list, then bind Sortable
+                    this.$nextTick(() => {
+                        const el = document.getElementById('sort-list');
+                        if (this.sortInstance) this.sortInstance.destroy();
+                        this.sortInstance = Sortable.create(el, {
+                            animation: 150,
+                            ghostClass: 'sortable-ghost',
+                            chosenClass: 'sortable-chosen'
+                        });
+                    });
+                },
+                checkSortOrder() {
+                    const el = document.getElementById('sort-list');
+                    const currentOrder = Array.from(el.children).map(item => item.innerText.trim());
+                    const original = this.currentLesson.content.sentences;
+                    
+                    this.isSortedCorrect = (JSON.stringify(currentOrder) === JSON.stringify(original));
+                    
+                    if (this.isSortedCorrect) {
+                        // Success haptic or sound can go here
+                    } else {
+                        alert("顺序不对哦，再试一次吧！💪");
+                    }
                 }
             }
         }).mount('#app')
