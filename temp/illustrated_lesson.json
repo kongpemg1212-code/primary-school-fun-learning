@@ -1,61 +1,241 @@
 [
   {
-    "subject": "Math",
-    "title": "Unit 1: 认识平面图形",
+    "subject": "Chinese",
+    "title": "1. 春夏秋冬",
     "content": {
-      "subject": "数学",
-      "title": "第一单元：认识平面图形",
-      "shapes": [
+      "subject": "语文",
+      "title": "1. 春夏秋冬",
+      "category": "识字",
+      "vocabulary": [
         {
-          "type": "rectangle",
-          "name": "长方形",
-          "desc": "对边相等，四个直角"
+          "word": "春风",
+          "definition": "Spring breeze",
+          "pinyin": "chūn fēng"
         },
         {
-          "type": "square",
-          "name": "正方形",
-          "desc": "四条边都相等，四个直角"
+          "word": "夏雨",
+          "definition": "Summer rain",
+          "pinyin": "xià yǔ"
         },
         {
-          "type": "triangle",
-          "name": "三角形",
-          "desc": "三条边，三个角"
+          "word": "秋霜",
+          "definition": "Autumn frost",
+          "pinyin": "qiū shuāng"
         },
         {
-          "type": "circle",
-          "name": "圆",
-          "desc": "没有角，圆圆的"
+          "word": "冬雪",
+          "definition": "Winter snow",
+          "pinyin": "dōng xuě"
+        },
+        {
+          "word": "青草",
+          "definition": "Green grass",
+          "pinyin": "qīng cǎo"
+        },
+        {
+          "word": "红花",
+          "definition": "Red flower",
+          "pinyin": "hóng huā"
+        },
+        {
+          "word": "游鱼",
+          "definition": "Swimming fish",
+          "pinyin": "yóu yú"
+        },
+        {
+          "word": "飞鸟",
+          "definition": "Flying bird",
+          "pinyin": "fēi niǎo"
         }
-      ]
-    }
-  },
-  {
-    "subject": "Math",
-    "title": "Unit 2: 20以内的退位减法",
-    "content": {
-      "subject": "数学",
-      "title": "第二单元：20以内的退位减法",
-      "key_concepts": [
-        "破十法：15-9 -> 10-9=1, 1+5=6",
-        "想加算减：9+6=15 -> 15-9=6"
       ],
-      "problems": [
-        "15-9=?",
-        "12-8=?",
-        "13-7=?"
+      "sentences": [
+        "春风吹",
+        "夏雨落",
+        "秋霜降",
+        "冬雪飘",
+        "池草青",
+        "山花红",
+        "鱼出水",
+        "鸟入林"
       ]
     }
   },
   {
-    "subject": "Math",
-    "title": "Unit 3: 100以内数的认识",
+    "subject": "Chinese",
+    "title": "2. 姓氏歌",
     "content": {
-      "subject": "数学",
-      "title": "第三单元：100以内数的认识",
-      "key_concepts": [
-        "数数：10个一是1个十",
-        "数位：从右边起，第一位是个位，第二位是十位，第三位是百位",
-        "读数写数：都从高位起"
+      "subject": "语文",
+      "title": "2. 姓氏歌",
+      "category": "识字",
+      "vocabulary": [
+        {
+          "word": "姓",
+          "definition": "Surname",
+          "pinyin": "xìng"
+        },
+        {
+          "word": "李",
+          "definition": "Li (surname)",
+          "pinyin": "lǐ"
+        },
+        {
+          "word": "张",
+          "definition": "Zhang (surname)",
+          "pinyin": "zhāng"
+        },
+        {
+          "word": "胡",
+          "definition": "Hu (surname)",
+          "pinyin": "hú"
+        },
+        {
+          "word": "吴",
+          "definition": "Wu (surname)",
+          "pinyin": "wú"
+        },
+        {
+          "word": "徐",
+          "definition": "Xu (surname)",
+          "pinyin": "xú"
+        },
+        {
+          "word": "许",
+          "definition": "Xu (surname)",
+          "pinyin": "xǔ"
+        }
+      ],
+      "sentences": [
+        "你姓什么？我姓李。什么李？木子李。",
+        "他姓什么？他姓张。什么张？弓长张。",
+        "古月胡，口天吴，双人徐，言午许。"
+      ]
+    }
+  },
+  {
+    "subject": "Chinese",
+    "title": "3. 小青蛙",
+    "content": {
+      "subject": "语文",
+      "title": "3. 小青蛙",
+      "category": "识字",
+      "vocabulary": [
+        {
+          "word": "青蛙",
+          "definition": "Frog",
+          "pinyin": "qīng wā"
+        },
+        {
+          "word": "河水",
+          "definition": "River water",
+          "pinyin": "hé shuǐ"
+        },
+        {
+          "word": "清",
+          "definition": "Clear",
+          "pinyin": "qīng"
+        },
+        {
+          "word": "天气",
+          "definition": "Weather",
+          "pinyin": "tiān qì"
+        },
+        {
+          "word": "晴",
+          "definition": "Sunny",
+          "pinyin": "qíng"
+        },
+        {
+          "word": "眼睛",
+          "definition": "Eye",
+          "pinyin": "yǎn jing"
+        },
+        {
+          "word": "保护",
+          "definition": "Protect",
+          "pinyin": "bǎo hù"
+        },
+        {
+          "word": "害虫",
+          "definition": "Pest",
+          "pinyin": "hài chóng"
+        },
+        {
+          "word": "事情",
+          "definition": "Thing/Matter",
+          "pinyin": "shì qing"
+        }
+      ],
+      "sentences": [
+        "河水清清天气晴，小小青蛙大眼睛。",
+        "保护禾苗吃害虫，做了不少好事情。",
+        "请你爱护小青蛙，好让禾苗不生病。"
+      ]
+    }
+  },
+  {
+    "subject": "Chinese",
+    "title": "4. 猜字谜",
+    "content": {
+      "subject": "语文",
+      "title": "4. 猜字谜",
+      "category": "识字",
+      "vocabulary": [
+        {
+          "word": "相遇",
+          "definition": "Meet",
+          "pinyin": "xiāng yù"
+        },
+        {
+          "word": "喜欢",
+          "definition": "Like",
+          "pinyin": "xǐ huan"
+        },
+        {
+          "word": "怕",
+          "definition": "Fear",
+          "pinyin": "pà"
+        },
+        {
+          "word": "言",
+          "definition": "Speech/Word",
+          "pinyin": "yán"
+        },
+        {
+          "word": "互相",
+          "definition": "Mutual",
+          "pinyin": "hù xiāng"
+        },
+        {
+          "word": "尊重",
+          "definition": "Respect",
+          "pinyin": "zūn zhòng"
+        },
+        {
+          "word": "感动",
+          "definition": "Moved/Touching",
+          "pinyin": "gǎn dòng"
+        },
+        {
+          "word": "万里无云",
+          "definition": "Cloudless sky",
+          "pinyin": "wàn lǐ wú yún"
+        },
+        {
+          "word": "纯净",
+          "definition": "Pure",
+          "pinyin": "chún jìng"
+        },
+        {
+          "word": "透明",
+          "definition": "Transparent",
+          "pinyin": "tòu míng"
+        }
+      ],
+      "sentences": [
+        "左边绿，右边红，左右相遇起凉风。",
+        "绿的喜欢及时雨，红的最怕水来攻。",
+        "言来互相尊重，心至令人感动。",
+        "日出万里无云，水到纯净透明。"
       ]
     }
   }
