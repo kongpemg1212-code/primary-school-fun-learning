@@ -47,44 +47,49 @@ def process_lesson(json_path):
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
         
-    # Handle Chinese Vocabulary
-    vocab_list = data.get('content', {}).get('vocabulary', [])
-    updated_count = 0
-    
-    for item in vocab_list:
-        word = item.get('word')
-        definition = item.get('definition', '')
+    # Check if list or dict
+    if isinstance(data, list):
+        lessons = data
+    else:
+        lessons = [data]
         
-        # Check if image already exists
-        if not item.get('image') or item.get('image') == "LEAVE_EMPTY_FOR_NOW":
-            # Translate or use English word if available? 
-            # Pollinations understands English better.
-            # We assume 'word' might be Chinese. 
-            # Simple heuristic: use definition if it looks English, or just word + definition
-            search_term = f"{word} {definition}"
-            
-            local_path, url = generate_image_free(search_term, f"{word}.jpg")
-            
-            if local_path:
-                item['image'] = local_path
-                item['image_url'] = url 
-                item['local_name'] = Path(local_path).name
-                updated_count += 1
-                print(f"✅ Saved to {local_path}")
-            else:
-                print(f"⚠️ Skipping image for {word}")
-        else:
-            print(f"ℹ️ Image already exists for {word}")
-            
-    # Handle Math Shapes (Optional: generate icon if missing?)
-    # Math shapes are drawn by Canvas, so we might not need images.
+    total_updated = 0
     
+    for lesson in lessons:
+        # Handle Chinese Vocabulary
+        vocab_list = lesson.get('content', {}).get('vocabulary', [])
+        
+        for item in vocab_list:
+            word = item.get('word')
+            definition = item.get('definition', '')
+            
+            # Check if image already exists
+            if not item.get('image') or item.get('image') == "LEAVE_EMPTY_FOR_NOW":
+                # Translate or use English word if available? 
+                # Pollinations understands English better.
+                # We assume 'word' might be Chinese. 
+                # Simple heuristic: use definition if it looks English, or just word + definition
+                search_term = f"{word} {definition}"
+                
+                local_path, url = generate_image_free(search_term, f"{word}.jpg")
+                
+                if local_path:
+                    item['image'] = local_path
+                    item['image_url'] = url 
+                    item['local_name'] = Path(local_path).name
+                    total_updated += 1
+                    print(f"✅ Saved to {local_path}")
+                else:
+                    print(f"⚠️ Skipping image for {word}")
+            else:
+                print(f"ℹ️ Image already exists for {word}")
+            
     # Save updated JSON
     output_path = Path("temp") / "illustrated_lesson.json"
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Illustrated data saved to {output_path} (Updated {updated_count} images)")
+    print(f"✅ Illustrated data saved to {output_path} (Updated {total_updated} images)")
 
 if __name__ == "__main__":
     import argparse

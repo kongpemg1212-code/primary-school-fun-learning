@@ -51,7 +51,13 @@ def run_pipeline(pdf_path):
         illustrated_json = temp_json
         
     with open(illustrated_json, 'r', encoding='utf-8') as f:
-        new_lesson = json.load(f)
+        new_data = json.load(f)
+
+    # Normalize single object to list for batch processing
+    if isinstance(new_data, dict):
+        new_lessons_list = [new_data]
+    else:
+        new_lessons_list = new_data
         
     # 3. Update Data
     lessons_path = Path("data/lessons.json")
@@ -66,24 +72,33 @@ def run_pipeline(pdf_path):
     
     # Check for duplicates based on title
     existing_titles = {l.get('title'): l.get('id') for l in lessons}
-    new_title = new_lesson.get('title')
     
-    if new_title in existing_titles:
-        print(f"⚠️ Warning: Lesson '{new_title}' already exists (ID: {existing_titles[new_title]}).")
-        # Update existing lesson instead of appending new one?
-        # For now, let's update it in place to avoid duplicates.
-        target_id = existing_titles[new_title]
-        new_lesson['id'] = target_id
-        # Replace the old lesson with the new one
-        for i, l in enumerate(lessons):
-            if l.get('id') == target_id:
-                lessons[i] = new_lesson
-                break
-        print(f"🔄 Updated existing lesson (ID: {target_id})")
-    else:
-        new_lesson['id'] = max_id + 1
-        lessons.append(new_lesson)
-        print(f"✅ Added new lesson (ID: {new_lesson['id']})")
+    updated_count = 0
+    added_count = 0
+    
+    for new_lesson in new_lessons_list:
+        new_title = new_lesson.get('title')
+        
+        if new_title in existing_titles:
+            print(f"⚠️ Warning: Lesson '{new_title}' already exists (ID: {existing_titles[new_title]}).")
+            # Update existing lesson instead of appending new one?
+            target_id = existing_titles[new_title]
+            new_lesson['id'] = target_id
+            # Replace the old lesson with the new one
+            for i, l in enumerate(lessons):
+                if l.get('id') == target_id:
+                    lessons[i] = new_lesson
+                    break
+            print(f"🔄 Updated existing lesson (ID: {target_id})")
+            updated_count += 1
+        else:
+            max_id += 1
+            new_lesson['id'] = max_id
+            lessons.append(new_lesson)
+            print(f"✅ Added new lesson '{new_title}' (ID: {new_lesson['id']})")
+            added_count += 1
+    
+    print(f"📊 Summary: {added_count} added, {updated_count} updated.")
     
     with open(lessons_path, 'w', encoding='utf-8') as f:
         json.dump(lessons, f, indent=2, ensure_ascii=False)

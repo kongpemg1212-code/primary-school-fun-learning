@@ -1,25 +1,42 @@
-{
-  "subject": "Math",
-  "title": "拼一拼：认识平面图形",
-  "content": {
-    "subject": "数学",
-    "title": "拼一拼：图形的组合",
-    "shapes": [
-        {
-          "type": "rectangle",
-          "name": "长方形",
-          "desc": "用2个同样的长方形可以拼成一个新的长方形"
-        },
-        {
-          "type": "triangle",
-          "name": "三角形",
-          "desc": "用2个同样的三角形可以拼成一个平行四边形"
-        },
-        {
-          "type": "square",
-          "name": "正方形",
-          "desc": "将一张正方形的纸对折后剪开，可以发现什么？"
-        }
-    ]
+[
+  {
+    "subject": "Math",
+    "title": "Unit 1: 认识平面图形",
+    "content": {
+      "subject": "数学",
+      "title": "第一单元：认识平面图形",
+      "shapes": [
+        {"type": "rectangle", "name": "长方形", "desc": "对边相等，四个直角"},
+        {"type": "square", "name": "正方形", "desc": "四条边都相等，四个直角"},
+        {"type": "triangle", "name": "三角形", "desc": "三条边，三个角"},
+        {"type": "circle", "name": "圆", "desc": "没有角，圆圆的"}
+      ]
+    }
+  },
+  {
+    "subject": "Math",
+    "title": "Unit 2: 20以内的退位减法",
+    "content": {
+      "subject": "数学",
+      "title": "第二单元：20以内的退位减法",
+      "key_concepts": [
+        "破十法：15-9 -> 10-9=1, 1+5=6",
+        "想加算减：9+6=15 -> 15-9=6"
+      ],
+      "problems": ["15-9=?", "12-8=?", "13-7=?"]
+    }
+  },
+  {
+    "subject": "Math",
+    "title": "Unit 3: 100以内数的认识",
+    "content": {
+      "subject": "数学",
+      "title": "第三单元：100以内数的认识",
+      "key_concepts": [
+        "数数：10个一是1个十",
+        "数位：从右边起，第一位是个位，第二位是十位，第三位是百位",
+        "读数写数：都从高位起"
+      ]
+    }
   }
-}
+]

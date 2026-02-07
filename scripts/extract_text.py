@@ -2,10 +2,13 @@ import fitz  # PyMuPDF
 import json
 
 doc = fitz.open("primary-school-fun-learning/1年级下册（2025春）_Part1_P1-33.pdf")
-page = doc[7] # Page 8 (index 7)
-text = page.get_text("text")
-
-print(f"--- Page 5 Content ---\n{text}\n----------------------")
+for i in range(33): # Pages 0-32 (1-33)
+    try:
+        page = doc[i]
+        text = page.get_text("text")
+        print(f"--- Page {i+1} ---\n{text}\n")
+    except Exception:
+        pass
 
 # Quick manual JSON construction for demo if text is good
 data = {
