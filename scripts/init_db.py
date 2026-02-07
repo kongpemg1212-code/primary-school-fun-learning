@@ -21,6 +21,7 @@ def init_edu_db(db_path="data/edu_system.db"):
         pronunciation TEXT,
         definition TEXT,
         example TEXT,
+        image_url TEXT,
         FOREIGN KEY(lesson_id) REFERENCES lessons(id)
     )''')
     

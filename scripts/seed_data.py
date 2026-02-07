@@ -13,10 +13,34 @@ def seed_initial_data():
         "title": "春夏秋冬",
         "category": "识字",
         "vocabulary": [
-            {"word": "春风", "pinyin": "chūn fēng", "definition": "春天的风", "example": "春风吹"},
-            {"word": "夏雨", "pinyin": "xià yǔ", "definition": "夏天的雨", "example": "夏雨落"},
-            {"word": "秋霜", "pinyin": "qiū shuāng", "definition": "秋天的霜", "example": "秋霜降"},
-            {"word": "冬雪", "pinyin": "dōng xuě", "definition": "冬天的雪", "example": "冬雪飘"}
+            {
+                "word": "春风", 
+                "pinyin": "chūn fēng", 
+                "definition": "春天的风", 
+                "example": "春风吹",
+                "image": "https://image.pollinations.ai/prompt/beautiful%20digital%20painting%20of%20gentle%20spring%20breeze%20blowing%20through%20pink%20cherry%20blossoms%20soft%20colors%20kids%20illustration?width=600&height=400&nologo=true"
+            },
+            {
+                "word": "夏雨", 
+                "pinyin": "xià yǔ", 
+                "definition": "夏天的雨", 
+                "example": "夏雨落",
+                "image": "https://image.pollinations.ai/prompt/cute%20illustration%20of%20summer%20rain%20falling%20on%20green%20lotus%20leaves%20in%20a%20pond%20vibrant%20colors%20kids%20style?width=600&height=400&nologo=true"
+            },
+            {
+                "word": "秋霜", 
+                "pinyin": "qiū shuāng", 
+                "definition": "秋天的霜", 
+                "example": "秋霜降",
+                "image": "https://image.pollinations.ai/prompt/artistic%20kids%20illustration%20of%20white%20frost%20on%20red%20maple%20leaves%20in%20autumn%20crisp%20morning%20light?width=600&height=400&nologo=true"
+            },
+            {
+                "word": "冬雪", 
+                "pinyin": "dōng xuě", 
+                "definition": "冬天的雪", 
+                "example": "冬雪飘",
+                "image": "https://image.pollinations.ai/prompt/whimsical%20illustration%20of%20soft%20white%20snow%20falling%20on%20a%20small%20wooden%20house%20winter%20wonderland%20kids%20book%20style?width=600&height=400&nologo=true"
+            }
         ],
         "sentences": ["春风吹", "夏雨落", "秋霜降", "冬雪飘"]
     }
@@ -26,8 +50,8 @@ def seed_initial_data():
     lesson_id_zh = c.lastrowid
     
     for v in chinese_content['vocabulary']:
-        c.execute("INSERT INTO chinese_vocab (lesson_id, word, pronunciation, definition, example) VALUES (?, ?, ?, ?, ?)",
-                  (lesson_id_zh, v['word'], v['pinyin'], v['definition'], v['example']))
+        c.execute("INSERT INTO chinese_vocab (lesson_id, word, pronunciation, definition, example, image_url) VALUES (?, ?, ?, ?, ?, ?)",
+                  (lesson_id_zh, v['word'], v['pinyin'], v['definition'], v['example'], v['image']))
     
     # 2. 数学课文：认识平面图形
     math_content = {

@@ -82,11 +82,18 @@
                     </div>
 
                     <!-- 课文内容 -->
-                    <div class="flex flex-col items-center space-y-6">
-                        <div v-for="(line, idx) in currentLesson.content.sentences" :key="idx" class="text-2xl md:text-3xl font-kids tracking-wider leading-relaxed">
-                            <template v-for="(char, cIdx) in line.split('')">
-                                <span :class="{'hidden-word': isHidden(char, cIdx, idx)}">{{ char }}</span>
-                            </template>
+                    <div class="flex flex-col items-center space-y-8">
+                        <div v-for="(line, idx) in currentLesson.content.sentences" :key="idx" class="flex flex-col items-center">
+                            <!-- 对应的插图 (MEU-DA-002 高质量生图) -->
+                            <img v-if="currentLesson.content.vocabulary[idx] && currentLesson.content.vocabulary[idx].image" 
+                                 :src="currentLesson.content.vocabulary[idx].image" 
+                                 class="w-48 h-32 object-cover rounded-2xl shadow-md mb-3 border-4 border-white transform hover:scale-105 transition-transform">
+                            
+                            <div class="text-2xl md:text-3xl font-kids tracking-wider leading-relaxed text-center">
+                                <template v-for="(char, cIdx) in line.split('')">
+                                    <span :class="{'hidden-word': isHidden(char, cIdx, idx)}">{{ char }}</span>
+                                </template>
+                            </div>
                         </div>
                     </div>
                     
