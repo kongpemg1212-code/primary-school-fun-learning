@@ -75,5 +75,82 @@
         }
       ]
     }
+  },
+  {
+    "id": 3,
+    "subject": "Chinese",
+    "title": "春夏秋冬",
+    "content": {
+      "subject": "语文",
+      "title": "春夏秋冬",
+      "category": "识字",
+      "vocabulary": [
+        {
+          "word": "春风",
+          "pinyin": "chūn fēng",
+          "definition": "春天的风",
+          "example": "春风吹",
+          "image": "https://images.unsplash.com/photo-1516533075015-a3838414c3cb?w=600&q=80"
+        },
+        {
+          "word": "夏雨",
+          "pinyin": "xià yǔ",
+          "definition": "夏天的雨",
+          "example": "夏雨落",
+          "image": "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=600&q=80"
+        },
+        {
+          "word": "秋霜",
+          "pinyin": "qiū shuāng",
+          "definition": "秋天的霜",
+          "example": "秋霜降",
+          "image": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600&q=80"
+        },
+        {
+          "word": "冬雪",
+          "pinyin": "dōng xuě",
+          "definition": "冬天的雪",
+          "example": "冬雪飘",
+          "image": "https://images.unsplash.com/photo-1418985991508-e473fa6f9cc0?w=600&q=80"
+        }
+      ],
+      "sentences": [
+        "春风吹",
+        "夏雨落",
+        "秋霜降",
+        "冬雪飘"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "subject": "Math",
+    "title": "认识平面图形",
+    "content": {
+      "subject": "数学",
+      "title": "认识平面图形",
+      "shapes": [
+        {
+          "type": "rectangle",
+          "name": "长方形",
+          "desc": "四条边，四个直角，对边相等"
+        },
+        {
+          "type": "square",
+          "name": "正方形",
+          "desc": "四条边都相等，四个直角"
+        },
+        {
+          "type": "triangle",
+          "name": "三角形",
+          "desc": "三条边，三个角"
+        },
+        {
+          "type": "circle",
+          "name": "圆",
+          "desc": "曲线围成的封闭图形"
+        }
+      ]
+    }
   }
 ]
