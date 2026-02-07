@@ -84,10 +84,16 @@
                     <!-- 课文内容 -->
                     <div class="flex flex-col items-center space-y-8">
                         <div v-for="(line, idx) in currentLesson.content.sentences" :key="idx" class="flex flex-col items-center">
-                            <!-- 对应的插图 (MEU-DA-002 高质量生图) -->
-                            <img v-if="currentLesson.content.vocabulary[idx] && currentLesson.content.vocabulary[idx].image" 
-                                 :src="currentLesson.content.vocabulary[idx].image" 
-                                 class="w-48 h-32 object-cover rounded-2xl shadow-md mb-3 border-4 border-white transform hover:scale-105 transition-transform">
+                            <!-- 对应的插图 (带有加载失败回退逻辑) -->
+                            <div v-if="currentLesson.content.vocabulary[idx] && currentLesson.content.vocabulary[idx].image" 
+                                 class="w-48 h-32 rounded-2xl shadow-md mb-3 border-4 border-white overflow-hidden bg-slate-200 flex items-center justify-center relative">
+                                <img :src="currentLesson.content.vocabulary[idx].image" 
+                                     @error="handleImgError"
+                                     class="w-full h-full object-cover transform hover:scale-105 transition-transform">
+                                <div class="image-placeholder absolute inset-0 flex items-center justify-center text-slate-400 text-xs font-black uppercase hidden">
+                                    {{ currentLesson.content.vocabulary[idx].word }}
+                                </div>
+                            </div>
                             
                             <div class="text-2xl md:text-3xl font-kids tracking-wider leading-relaxed text-center">
                                 <template v-for="(char, cIdx) in line.split('')">
@@ -360,6 +366,12 @@
                     const original = this.currentLesson.content.sentences;
                     this.isSortedCorrect = (JSON.stringify(currentOrder) === JSON.stringify(original));
                     if (!this.isSortedCorrect) alert("顺序不对哦，再试一次吧！💪");
+                },
+                handleImgError(e) {
+                    const img = e.target;
+                    const placeholder = img.nextElementSibling;
+                    img.style.display = 'none';
+                    if (placeholder) placeholder.classList.remove('hidden');
                 }
             }
         }).mount('#app')

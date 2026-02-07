@@ -3,10 +3,16 @@ import json
 
 DB_PATH = 'data/edu_system.db'
 
-def seed_initial_data():
+def seed_data():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     
+    # 清空旧数据，防止重复
+    c.execute("DELETE FROM chinese_vocab")
+    c.execute("DELETE FROM math_geometry")
+    c.execute("DELETE FROM lessons")
+    c.execute("DELETE FROM sqlite_sequence WHERE name IN ('lessons', 'chinese_vocab', 'math_geometry')")
+
     # 1. 语文课文：春夏秋冬
     chinese_content = {
         "subject": "语文",
@@ -18,28 +24,28 @@ def seed_initial_data():
                 "pinyin": "chūn fēng", 
                 "definition": "春天的风", 
                 "example": "春风吹",
-                "image": "https://image.pollinations.ai/prompt/beautiful%20digital%20painting%20of%20gentle%20spring%20breeze%20blowing%20through%20pink%20cherry%20blossoms%20soft%20colors%20kids%20illustration?width=600&height=400&nologo=true"
+                "image": "https://images.unsplash.com/photo-1495530638670-ce58247e8652?w=600"
             },
             {
                 "word": "夏雨", 
                 "pinyin": "xià yǔ", 
                 "definition": "夏天的雨", 
                 "example": "夏雨落",
-                "image": "https://image.pollinations.ai/prompt/cute%20illustration%20of%20summer%20rain%20falling%20on%20green%20lotus%20leaves%20in%20a%20pond%20vibrant%20colors%20kids%20style?width=600&height=400&nologo=true"
+                "image": "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=600"
             },
             {
                 "word": "秋霜", 
                 "pinyin": "qiū shuāng", 
                 "definition": "秋天的霜", 
                 "example": "秋霜降",
-                "image": "https://image.pollinations.ai/prompt/artistic%20kids%20illustration%20of%20white%20frost%20on%20red%20maple%20leaves%20in%20autumn%20crisp%20morning%20light?width=600&height=400&nologo=true"
+                "image": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600"
             },
             {
                 "word": "冬雪", 
                 "pinyin": "dōng xuě", 
                 "definition": "冬天的雪", 
                 "example": "冬雪飘",
-                "image": "https://image.pollinations.ai/prompt/whimsical%20illustration%20of%20soft%20white%20snow%20falling%20on%20a%20small%20wooden%20house%20winter%20wonderland%20kids%20book%20style?width=600&height=400&nologo=true"
+                "image": "https://images.unsplash.com/photo-1418985991508-e473fa6f9cc0?w=600"
             }
         ],
         "sentences": ["春风吹", "夏雨落", "秋霜降", "冬雪飘"]
@@ -91,7 +97,7 @@ def seed_initial_data():
         json.dump(export_data, f, indent=2, ensure_ascii=False)
         
     conn.close()
-    print("✅ Initial data seeded and exported to data/lessons.json")
+    print("✅ Database cleaned and re-seeded. Data exported.")
 
 if __name__ == "__main__":
-    seed_initial_data()
+    seed_data()
