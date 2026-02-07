@@ -1,13 +1,33 @@
 import sqlite3
 import json
+import os
+import requests
 
 DB_PATH = 'data/edu_system.db'
+IMAGE_DIR = 'assets/images'
+
+def download_image(url, filename):
+    local_path = os.path.join(IMAGE_DIR, filename)
+    if os.path.exists(local_path):
+        return local_path
+    
+    try:
+        print(f"Downloading {url} to {local_path}...")
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            with open(local_path, 'wb') as f:
+                f.write(response.content)
+            return local_path
+    except Exception as e:
+        print(f"Failed to download {url}: {e}")
+    return url # Fallback to original URL if download fails
 
 def seed_data():
+    os.makedirs(IMAGE_DIR, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     
-    # 清空旧数据，防止重复
+    # 清空旧数据
     c.execute("DELETE FROM chinese_vocab")
     c.execute("DELETE FROM math_geometry")
     c.execute("DELETE FROM lessons")
@@ -24,33 +44,47 @@ def seed_data():
                 "pinyin": "chūn fēng", 
                 "definition": "春天的风", 
                 "example": "春风吹",
-                "image": "https://images.unsplash.com/photo-1495530638670-ce58247e8652?w=600"
+                "image_url": "https://images.unsplash.com/photo-1495530638670-ce58247e8652?w=600",
+                "local_name": "spring_breeze.jpg"
             },
             {
                 "word": "夏雨", 
                 "pinyin": "xià yǔ", 
                 "definition": "夏天的雨", 
                 "example": "夏雨落",
-                "image": "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=600"
+                "image_url": "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=600",
+                "local_name": "summer_rain.jpg"
             },
             {
                 "word": "秋霜", 
                 "pinyin": "qiū shuāng", 
                 "definition": "秋天的霜", 
                 "example": "秋霜降",
-                "image": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600"
+                "image_url": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600",
+                "local_name": "autumn_frost.jpg"
             },
             {
                 "word": "冬雪", 
                 "pinyin": "dōng xuě", 
                 "definition": "冬天的雪", 
                 "example": "冬雪飘",
-                "image": "https://images.unsplash.com/photo-1418985991508-e473fa6f9cc0?w=600"
+                "image_url": "https://images.unsplash.com/photo-1418985991508-e473fa6f9cc0?w=600",
+                "local_name": "winter_snow.jpg"
             }
         ],
         "sentences": ["春风吹", "夏雨落", "秋霜降", "冬雪飘"]
     }
     
+    # Process images: Download and replace URLs with local paths
+    processed_vocab = []
+    for v in chinese_content['vocabulary']:
+        local_path = download_image(v['image_url'], v['local_name'])
+        # Store as relative path for web
+        v['image'] = local_path 
+        processed_vocab.append(v)
+    
+    chinese_content['vocabulary'] = processed_vocab
+
     c.execute("INSERT INTO lessons (subject, title, content_json) VALUES (?, ?, ?)",
               ("Chinese", "春夏秋冬", json.dumps(chinese_content, ensure_ascii=False)))
     lesson_id_zh = c.lastrowid
@@ -97,7 +131,7 @@ def seed_data():
         json.dump(export_data, f, indent=2, ensure_ascii=False)
         
     conn.close()
-    print("✅ Database cleaned and re-seeded. Data exported.")
+    print("✅ Local image sync complete. Database re-seeded.")
 
 if __name__ == "__main__":
     seed_data()
